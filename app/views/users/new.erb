@@ -1,1 +1,23 @@
-<h1>Form to sign up</h1>
+<h1>Create a new profile</h1>
+
+<form action="/users" method="post">
+    <p>
+        <div><label for="first_name"> First name: </label></div>
+        <input type="text" id="first_name" name="user[first_name]">
+    </p>
+    <p>
+        <div><label for="last_name"> Last name: </label></div>
+        <input type="text" id="last_name" name="user[last_name]">
+    </p>
+    <p>
+        <div><label for="email"> Email: </label><div>
+        <input type="email" id="email" name="user[email]">
+    </p>
+    <p>
+        <div><label for="password"> Password: </label><div>
+        <input type="password" id="password" name="user[password]">
+    <p>
+    <p>
+        <input type="submit" value="Sign Up">
+    </p>
+</form>
