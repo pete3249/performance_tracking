@@ -7,7 +7,13 @@ class UsersController < ApplicationController
 
     #create new user
     post '/users' do
-        
+        user = User.new(params[:user])
+        if user.save
+            session[:id] = user.id
+            redirect '/'
+        else
+            redirect '/users/new'
+        end 
     end
 
 end 
