@@ -2,13 +2,10 @@
 <h3>Graduation Year: <%= @student.grad_year%></h3>
 
 <% if logged_in? %>
-    <div>
-        <a href="/students/<%= @student.id %>/edit"><button>Edit Student</button></a> 
-    </div><br>
-    <div>
-        <form action="/students/<%= @student.id %>" method="post">
-            <input id="hidden" type="hidden" name="_method" value="delete">
-            <input type="submit" value="Delete Student">
-        </form>
-    </div>
+   <a href="/students/<%= @student.id %>/edit" style="display: inline-block;"><button>Edit Student</button></a>
+   
+   <form action="/students/<%= @student.id %>" method="post" style="display: inline-block;">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete Student">
+   </form>
 <% end %>
