@@ -15,7 +15,21 @@
   </head>
   <body>
     <div class="wrapper">
-
+      <nav>
+        <% if !logged_in? %>
+          <form action="/users/new" method="get" style="display: inline-block;"> 
+            <button><input type="submit" value="New User"></button>
+          </form>
+          <form action="/login" method="get" style="display: inline-block;"> 
+            <button><input type="submit" value="Login"></button>
+          </form>
+        <% else %>
+          <form action="/logout" method="post">
+            <input id="hidden" type="hidden" name="_method" value="delete" />
+            <button><input type="submit" value="Log Out" /></button>
+          </form>
+        <% end %>
+      </nav>
         <%= yield %>
 
       <footer class="branding">
