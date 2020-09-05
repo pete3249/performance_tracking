@@ -1,8 +1,9 @@
+<h1>Students</h1>
+
 <form action="/students/new" method="get" style="display: inline-block;"> 
     <button><input type="submit" value="New Student"></button>
 </form>
-
-<h1>Students</h1>
+<br><br>
 
 <% @students.each do |student|%>
     <a href="/students/<%= student.id %>"><%= student.first_name %> <%= student.last_name %></a>
