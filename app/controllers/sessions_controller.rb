@@ -17,4 +17,10 @@ class SessionsController < ApplicationController
         end 
     end
 
+    # clears the session, effectively logging out the user
+    delete '/logout' do
+        session.clear
+        redirect '/'
+    end
+
 end 
