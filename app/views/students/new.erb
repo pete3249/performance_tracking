@@ -1,5 +1,17 @@
 <h1>New Student</h1>
 
+<% if @student.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @student.errors.count %> error(s) prohibited this post from being saved:</h2>
+ 
+    <ul>
+    <% @student.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <form action="/students" method="post">
     <p>
         <div><label for="first_name"> First name: </label></div>
