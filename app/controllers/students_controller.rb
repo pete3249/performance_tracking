@@ -18,22 +18,22 @@ class StudentsController < ApplicationController
     end 
   end
 
-  # GET: /students/5
   get "/students/:id" do
+    @student = Student.find_by_id(params[:id])
     erb :"/students/show"
   end
 
-  # GET: /students/5/edit
   get "/students/:id/edit" do
+    @student = Student.find_by_id(params[:id])
     erb :"/students/edit"
   end
 
-  # PATCH: /students/5
   patch "/students/:id" do
-    redirect "/students/:id"
+    @student = Student.find_by_id(params[:id])
+    @student.update(params[:student])
+    redirect "/students/#{@student.id}"
   end
 
-  # DELETE: /students/5
   delete "/students/:id" do
     redirect "/students"
   end
