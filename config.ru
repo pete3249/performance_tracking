@@ -5,5 +5,7 @@ if ActiveRecord::Migrator.needs_migration?
 end
 
 run ApplicationController
+use StudentsController
+use PerformanceTestsController
 use UsersController
 use SessionsController
