@@ -1,28 +1,31 @@
 class StudentsController < ApplicationController
 
-  # GET: /students
   get "/students" do
-    erb :"/students/index.html"
+    @students = Student.all
+    erb :"/students/index"
   end
 
-  # GET: /students/new
   get "/students/new" do
-    erb :"/students/new.html"
+    erb :"/students/new"
   end
 
-  # POST: /students
   post "/students" do
-    redirect "/students"
+    @student = current_user.students.build(params[:student])
+    if @student.save
+      redirect "/students"
+    else
+      erb :'/students/new'
+    end 
   end
 
   # GET: /students/5
   get "/students/:id" do
-    erb :"/students/show.html"
+    erb :"/students/show"
   end
 
   # GET: /students/5/edit
   get "/students/:id/edit" do
-    erb :"/students/edit.html"
+    erb :"/students/edit"
   end
 
   # PATCH: /students/5
