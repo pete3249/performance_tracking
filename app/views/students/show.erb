@@ -1,1 +1,8 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h1><%= @student.first_name %> <%= @student.last_name %></h1>
+<h3>Graduation Year: <%= @student.grad_year%></h3>
+
+<% if logged_in? %>
+    <div>
+        <a href="/students/<%= @student.id %>/edit"><button>Edit Student</button></a> 
+    </div>
+<% end %>
