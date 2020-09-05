@@ -1,0 +1,13 @@
+<h1>Log In</h1>
+<strong><%= @error %></strong>
+<form action="/login" method="post">
+    <p>
+        <div><label for="email">Email: </label></div>
+        <input type="email" id="email" name="email">
+    </p>
+    <p>
+        <div><label for="password">Password: </label><div>
+        <input type="password" id="password" name="password">
+    </p>
+    <input type="submit" value="Log In">
+</form> 
