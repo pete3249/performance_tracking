@@ -32,4 +32,12 @@ class ApplicationController < Sinatra::Base
     end 
   end
 
+  def find_student
+    @student = Student.find_by_id(params[:id])
+    if @student.nil?
+      flash[:error] = "Couldn't find a student with id: #{params[:id]}"
+      redirect "/students"
+    end 
+  end 
+
 end
