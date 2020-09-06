@@ -13,6 +13,7 @@ class PerformanceTestsController < ApplicationController
   end
 
   post "/performance_tests" do
+    redirect_if_not_logged_in
     find_student
     @performance_test = @student.performance_tests.build(params[:performance_test])
     @performance_test.user = current_user
@@ -24,33 +25,53 @@ class PerformanceTestsController < ApplicationController
     end
   end
 
-  # GET: /performance_tests/5
   get "/performance_tests/:id" do
+    redirect_if_not_logged_in
+    find_test
     erb :"/performance_tests/show"
   end
 
-  # GET: /performance_tests/5/edit
   get "/performance_tests/:id/edit" do
+    find_test
+    redirect_if_fail_to_authorize
     erb :"/performance_tests/edit"
   end
 
-  # PATCH: /performance_tests/5
   patch "/performance_tests/:id" do
-    redirect "/performance_tests/:id"
+    find_test
+    redirect_if_fail_to_authorize
+    if @performance_test.update(params[:performance_test])
+      flash[:success] = "Test successfully updated"
+    else 
+      redirect "/performance_tests/#{@performance_test.id}"
+    end 
   end
 
-  # DELETE: /performance_tests/5
   delete "/performance_tests/:id" do
+    find_test
+    redirect_if_fail_to_authorize
+    @performance_test.destroy
     redirect "/performance_tests"
   end
 
-  private 
+  private
 
-  def find_student
-    @student = Student.find_by_id(params[:id])
-    if @student.nil?
-      flash[:error] = "Couldn't find a student with id: #{params[:id]}"
-      redirect "/students"
+  def authorize(performance_test)
+    current_user == performance_test.user
+  end
+
+  def redirect_if_fail_to_authorize
+    if !authorize(@performance_test)
+      flash[:error] = "You are not authorized to perform that action"
+      redirect '/performance_tests' 
+    end 
+  end 
+
+  def find_test
+    @performance_test = PerformanceTest.find_by_id(params[:id])
+    if @performance_test.nil?
+      flash[:error] = "Couldn't find a test with id: #{params[:id]}"
+      redirect "/performance_tests"
     end 
   end 
 
