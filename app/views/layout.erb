@@ -18,13 +18,13 @@
       <nav>
         <% if !logged_in? %>
           <form action="/users/new" method="get" style="display: inline-block;"> 
-            <button><input type="submit" value="New User"></button>
+            <button><input type="submit" value="New User" /></button>
           </form>
           <form action="/login" method="get" style="display: inline-block;"> 
-            <button><input type="submit" value="Login"></button>
+            <button><input type="submit" value="Login" /></button>
           </form>
         <% else %>
-          <form action="/logout" method="post">
+          <form action="/logout" method="post" style="display: inline-block;">
             <input id="hidden" type="hidden" name="_method" value="delete" />
             <button><input type="submit" value="Log Out" /></button>
           </form>
