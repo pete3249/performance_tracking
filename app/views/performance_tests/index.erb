@@ -3,6 +3,6 @@
 <% @students.each.with_index do |student, index|%>
     <h4><%= index + 1 %>. <%= student.first_name %> <%= student.last_name %></h4><br>
     <% student.performance_tests.each do |test|%>
-        <p><%= test.name %>: <%= test.result %> <%= test.testing_date.strftime("%B %Y") %></p>
+        <p><a href="/performance_tests/<%= test.id %>"><%= test.name %>: <%= test.result %> <%= test.testing_date.strftime("%B %Y") %></a></p>
     <% end %>
 <% end %>
