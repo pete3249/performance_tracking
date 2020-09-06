@@ -1,1 +1,32 @@
-<h1>Insert the form to edit an instance of your model here.</h1>
+<h1>Edit test for <%= @performance_test.student.first_name %></h1>
+
+<% if @performance_test.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= @performance_test.errors.count %> error(s) prohibited this post from being saved:</h2>
+ 
+    <ul>
+    <% @performance_test.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<form action="/performance_tests/<%= @performance_test.id %>" method="post">
+    <input id="hidden" type="hidden" name="_method" value="patch" />
+    <p>
+        <div><label for="name"> Test </label></div>
+        <input type="text" id="name" name="performance_test[name]" value="<%= @performance_test.name %>" />
+    </p>
+    <p>
+        <div><label for="result">Result </label></div>
+        <input type="text" id="result" name="performance_test[result]" value="<%= @performance_test.result %>" />
+    </p>
+    <p>
+        <div><label for="date">Date (yyyy/mm/dd) </label><div>
+        <input type="text" id="date" name="performance_test[testing_date]" value="<%= @performance_test.testing_date %>" />
+    </p>
+    <p>
+        <input type="submit" value="Update test" />
+    </p>
+</form>
