@@ -1,1 +1,20 @@
-<h1>Insert the form to create a new instance of your model.</h1>
+<h1>Create new test for <%= @student.first_name %></h1>
+
+<form action="/performance_tests" method="post">
+    <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+    <p>
+        <div><label for="name"> Test </label></div>
+        <input type="text" id="name" name="performance_test[name]" />
+    </p>
+    <p>
+        <div><label for="result">Result </label></div>
+        <input type="text" id="result" name="performance_test[result]" />
+    </p>
+    <p>
+        <div><label for="date">Date (dd/mm/yyyy) </label><div>
+        <input type="text" id="date" name="performance_test[testing_date]" />
+    </p>
+    <p>
+        <input type="submit" value="Finish" />
+    </p>
+</form>
