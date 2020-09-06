@@ -1,1 +1,8 @@
-<h1>This is the Model's index page.</h1>
+<h1>Performance Tests</h1>
+
+<% @students.each.with_index do |student, index|%>
+    <h4><%= index + 1 %>. <%= student.first_name %> <%= student.last_name %></h4><br>
+    <% student.performance_tests.each do |test|%>
+        <p><%= test.name %>: <%= test.result %> <%= test.testing_date.strftime("%B %Y") %></p>
+    <% end %>
+<% end %>
