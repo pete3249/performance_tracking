@@ -1,1 +1,18 @@
-<h1>This is the show page for an individual instance of your model.</h1>
+<h3><%= @performance_test.student.first_name%> <%= @performance_test.student.last_name%></h3>
+<p><%= @performance_test.name %></p>
+<p><%= @performance_test.result %></p>
+<p><%= @performance_test.testing_date.strftime("%B %Y")%></p>
+
+<% if authorize(@performance_test) %>
+   <form action="/performance_tests/<%= @performance_test.id %>/edit" method="get" style="display: inline-block;">
+    <input type="submit" value="Edit Test" />
+   </form>
+   <form action="/performance_tests/<%= @performance_test.id %>" method="post" style="display: inline-block;">
+    <input id="hidden" type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete Test" />
+   </form>
+<% end %>
+
+<form action="/performance_tests" method="get" style="display: inline-block;"> 
+    <button><input type="submit" value="Tests"></button>
+</form>
