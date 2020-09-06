@@ -1,5 +1,11 @@
 <h1>Students</h1>
 
+<% if logged_in? %>
+   <form action="/performance_tests" method="get" style="display: inline-block;">
+      <button><input type="submit" value="View Tests" /></button>
+   </form>
+<% end %>
+
 <form action="/students/new" method="get" style="display: inline-block;"> 
     <button><input type="submit" value="New Student"></button>
 </form>
