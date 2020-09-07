@@ -1,8 +1,7 @@
 class StudentsController < ApplicationController
 
   get "/students" do
-    redirect_if_not_logged_in
-    @students = Student.all
+    @students = Student.all.sort_by {|student| student.last_name}
     erb :"/students/index"
   end
 
