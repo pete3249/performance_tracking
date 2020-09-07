@@ -24,6 +24,9 @@
             <button><input type="submit" value="Login" /></button>
           </form>
         <% else %>
+          <form action="/students" method="get" style="display: inline-block;"> 
+            <button><input type="submit" value="Home" /></button>
+          </form>
           <form action="/logout" method="post" style="display: inline-block;">
             <input id="hidden" type="hidden" name="_method" value="delete" />
             <button><input type="submit" value="Log Out" /></button>
