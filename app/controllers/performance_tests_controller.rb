@@ -15,6 +15,7 @@ class PerformanceTestsController < ApplicationController
   post "/performance_tests" do
     redirect_if_not_logged_in
     find_student
+    params[:performance_test][:testing_date] = Date.strptime(params[:performance_test][:testing_date], "%m/%d/%Y")
     @performance_test = @student.performance_tests.build(params[:performance_test])
     @performance_test.user = current_user
     if @performance_test.save
