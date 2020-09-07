@@ -1,14 +1,10 @@
-<form action="/students" method="get" style="display: inline-block;">
-   <button><input type="submit" value="Students" /></button>
-</form>
-
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
 <h3>Graduation Year: <%= @student.grad_year%></h3>
 
 <% if logged_in? %>
    <form action="/performance_tests/new" method="get" style="display: inline-block;">
       <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-      <input type="submit" value="Add Data" />
+      <input type="submit" value="Add Test" />
    </form>
 <% end %>
 
