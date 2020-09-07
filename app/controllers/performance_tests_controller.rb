@@ -43,8 +43,10 @@ class PerformanceTestsController < ApplicationController
     redirect_if_fail_to_authorize
     if @performance_test.update(params[:performance_test])
       flash[:success] = "Test successfully updated"
-    else 
       redirect "/performance_tests/#{@performance_test.id}"
+    else 
+      flash[:error] = "Test not updated"
+      redirect "/performance_tests/#{@performance_test.id}/edit"
     end 
   end
 
@@ -64,7 +66,7 @@ class PerformanceTestsController < ApplicationController
   def redirect_if_fail_to_authorize
     if !authorize(@performance_test)
       flash[:error] = "You are not authorized to perform that action"
-      redirect '/performance_tests' 
+      redirect '/students' 
     end 
   end 
 
