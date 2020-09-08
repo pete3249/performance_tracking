@@ -35,14 +35,21 @@ th, td {
 <h3>Graduation Year: <%= @student.grad_year%></h3>
 
 <% if authorize_user(@student) %>
-   <form action="/students/<%= @student.id %>/edit" method="post" style="display: inline-block;">
-    <input id="hidden" type="hidden" name="_method" value="patch" />
+   <form action="/students/<%= @student.id %>/edit" method="get" style="display: inline-block;">
     <input type="submit" value="Edit Student" />
    </form>
    <form action="/students/<%= @student.id %>" method="post" style="display: inline-block;">
     <input id="hidden" type="hidden" name="_method" value="delete" />
     <input type="submit" value="Delete Student" />
    </form>
+<% end %>
+<br>
+
+<% if logged_in? %>
+  <form action="/performance_tests/new" method="get" style="display: inline-block;">
+    <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+    <input type="submit" value="New Test"/>
+  </form> 
 <% end %>
 <br><br>
 
@@ -53,7 +60,6 @@ th, td {
         <th>Date</th>
         <th>Edit Test</th>
         <th>Delete Test</th>
-        <th>New Test</th>
     </tr>
     <tr>
       <% if @student.performance_tests.empty? %>
@@ -61,11 +67,7 @@ th, td {
          <td></td>
          <td></td>
          <td></td>
-         <td></td>
-         <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-            <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-            <input type="submit" value="New Test"/>
-         </form></td>    
+         <td></td>  
       <% else %>
          <% @student.performance_tests.each do |test|%>
          <td><%= test.name %></td>
@@ -79,10 +81,6 @@ th, td {
             <input id="hidden" type="hidden" name="_method" value="delete" />
             <input type="submit" value="Delete" />
          </form></td>
-         <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-            <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-            <input type="submit" value="New"/>
-         </form></td> 
          </tr>   
          <% end %>
       <% end %>
