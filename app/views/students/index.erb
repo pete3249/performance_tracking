@@ -1,31 +1,37 @@
 <html>
 <head>
 <style>
+body  {
+  background-image: url("../images/wr_top_view.jpg");
+  background-size: cover;
+  background-color: #115517;
+}
+
 table {
-width:100%;
+  width:100%;
 }
-
+    
 table, th, td {
-border: 1px solid black;
-border-collapse: collapse;
+  border: 1px solid black;
+  border-collapse: collapse;
 }
-
+    
 th, td {
-padding: 15px;
-text-align: left;
+  padding: 15px;
+  text-align: left;
 }
-
+    
 #t01 tr:nth-child(even) {
-background-color: #eee;
+  background-color: #eee;
 }
-
+    
 #t01 tr:nth-child(odd) {
-background-color: #fff;
+  background-color: #fff;
 }
-
+    
 #t01 th {
-background-color: white;
-color: black;
+  background-color: white;
+  color: black;
 }
 </style>
 </head>
@@ -36,48 +42,57 @@ color: black;
 <form action="/performance_tests" method="get" style="display: inline-block;">
     <button><input type="submit" value="All Results" /></button>
 </form>
-<% end %>
 
 <form action="/students/new" method="get" style="display: inline-block;"> 
     <button><input type="submit" value="New Student"></button>
 </form>
 <br><br>
+<% end %>
 
 <table style="width:100%">
     <tr>
-        <th></th>
         <th>First</th>
         <th>Last</th>
         <th>Year</th>
-        <th>Last Recorded</th>
+        <th>Latest</th>
         <th>Result</th>
         <th>Date</th>
-        <th></th>
-        <th></th>
+        <th>Edit Test</th>
+        <th>New Test</th>
+        <th>All Tests</th>
     </tr>
     <% @students.each do |student|%>
     <tr>
-        <td><form action="/students/<%= student.id %>/edit" method="get" style="display: inline-block;">
-        <input type="submit" value="Edit <%= student.first_name %>"/>
-        </form></td>
         <td><%= student.first_name %></td>
         <td><%= student.last_name %></td>
         <td><%= student.grad_year %></td>
-        <td><%= student.performance_tests.order("created_at").last.name %></td>
-        <td><%= student.performance_tests.order("created_at").last.result %></td>
-        <td><%= student.performance_tests.order("created_at").last.testing_date.strftime("%B %Y")%></td>
-        <td><form action="/performance_tests/<%= student.performance_tests.order("created_at").last.id %>/edit" method="get" style="display: inline-block;">
-            <input type="submit" value="Edit Test"/>
-        </form></td>
-        <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-            <input type="hidden" id="id" name="id" value="<%= student.id %>" />
-            <input type="submit" value="Add Test"/>
-        </form></td>
+        <% if student.performance_tests.empty?%>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+            <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
+                <input type="hidden" id="id" name="id" value="<%= student.id %>" />
+                <input type="submit" value="New"/>
+            </form></td>
+            <td></td>
+        <% else %>
+            <td><%= student.performance_tests.order("created_at").last.name %></td>
+            <td><%= student.performance_tests.order("created_at").last.result %></td>
+            <td><%= student.performance_tests.order("created_at").last.testing_date.strftime("%B %Y")%></td>
+            <td><form action="/performance_tests/<%= student.performance_tests.order("created_at").last.id %>/edit" method="get" style="display: inline-block;">
+                <input type="submit" value="Edit"/>
+            </form></td>
+            <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
+                <input type="hidden" id="id" name="id" value="<%= student.id %>" />
+                <input type="submit" value="New"/>
+            </form></td>
+            <td><form action="/students/<%= student.id %>" method="get" style="display: inline-block;">
+                <input type="submit" value="All Data" />
+            </form></td>
     </tr>
+        <%end %>
     <% end %>
 </table>
 </body>
 </html>
-
-
-
