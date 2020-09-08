@@ -51,6 +51,11 @@ class StudentsController < ApplicationController
     redirect "/students"
   end
 
+  get "/students/:id/tests" do
+    find_student
+    erb :"/students/tests"
+  end
+
   private
 
   def authorize_user(student)
