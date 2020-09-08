@@ -1,16 +1,82 @@
+<style>
+body  {
+  background-color: #115517;
+}
+
+table {
+  width:100%;
+}
+    
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+    
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+    
+#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+    
+#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+    
+#t01 th {
+  background-color: white;
+  color: black;
+}
+</style>
+
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
 <h3>Graduation Year: <%= @student.grad_year%></h3>
 
-<% if logged_in? %>
-   <form action="/performance_tests/new" method="get" style="display: inline-block;">
-      <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-      <input type="submit" value="Add Test" />
-   </form>
-<% end %>
-
 <% if authorize_user(@student) %>
+   <form action="/students/<%= @student.id %>/edit" method="post" style="display: inline-block;">
+    <input id="hidden" type="hidden" name="_method" value="edit" />
+    <input type="submit" value="Edit Student" />
+   </form>
    <form action="/students/<%= @student.id %>" method="post" style="display: inline-block;">
     <input id="hidden" type="hidden" name="_method" value="delete" />
     <input type="submit" value="Delete Student" />
    </form>
 <% end %>
+<br><br>
+
+
+<table style="width:100%">
+    <tr>
+        <th>Test Name</th>
+        <th>Result</th>
+        <th>Date</th>
+        <th>Edit Test</th>
+        <th>Delete Test</th>
+        <th>New Test</th>
+    </tr>
+    <% @student.performance_tests.each do |test|%>
+    <tr>
+        <td><%= test.name %></td>
+        <td><%= test.result %></td>
+        <td><%= test.testing_date.strftime("%B %Y") %></td>
+        <% if authorize_user(@student)%>
+            <td><form action="/performance_tests/<%= test.id %>/edit" method="get" style="display: inline-block;">
+                <input type="submit" value="Edit"/>
+            </form></td>
+            <td><form action="/performance_tests/<%= test.id %>" method="post" style="display: inline-block;">
+               <input id="hidden" type="hidden" name="_method" value="delete" />
+               <input type="submit" value="Delete Test" />
+            </form></td>
+        <% else %>
+            <td></td>
+            <td></td>
+         <% end %>    
+         <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
+                <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+                <input type="submit" value="Add Test"/>
+         </form></td>
+    </tr>
+   <% end %>
+</table>
