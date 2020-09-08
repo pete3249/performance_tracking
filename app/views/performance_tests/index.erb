@@ -42,7 +42,7 @@ th, td {
                 <th>Result</th>
                 <th>Date</th>
             </tr>
-            <% student.performance_tests.each do |test|%>
+            <% student.performance_tests.order("created_at").each do |test|%>
                 <tr>
                     <td><%= test.name %></td>
                     <td><%= test.result %></td>
