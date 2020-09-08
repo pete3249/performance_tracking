@@ -1,4 +1,4 @@
-<h1>New Student</h1>
+<h1>Create new student</h1>
 
 <% if @student.errors.any? %>
   <div id="error_explanation">
@@ -14,15 +14,15 @@
 
 <form action="/students" method="post">
     <p>
-        <div><label for="first_name"> First name: </label></div>
+        <div><label for="first_name"> First name </label></div>
         <input type="text" id="first_name" name="student[first_name]">
     </p>
     <p>
-        <div><label for="last_name"> Last name: </label></div>
+        <div><label for="last_name"> Last name</label></div>
         <input type="text" id="last_name" name="student[last_name]">
     </p>
     <p>
-        <div><label for="grad_year"> Graduation Year: </label><div>
+        <div><label for="grad_year"> Graduation year </label><div>
         <input type="text" id="grad_year" name="student[grad_year]">
     </p>
     <p>
