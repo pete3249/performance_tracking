@@ -54,12 +54,12 @@ th, td {
         <th>First</th>
         <th>Last</th>
         <th>Year</th>
-        <th>Latest</th>
+        <th>Latest Test</th>
         <th>Result</th>
         <th>Date</th>
         <th>Edit Test</th>
         <th>New Test</th>
-        <th>All Tests</th>
+        <th>All</th>
     </tr>
     <% @students.each do |student|%>
     <tr>
@@ -71,10 +71,6 @@ th, td {
              <td></td>
              <td></td>
              <td></td>
-            <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-                <input type="hidden" id="id" name="id" value="<%= student.id %>" />
-                <input type="submit" value="New"/>
-            </form></td>
         <% else %>
             <td><%= student.performance_tests.order("created_at").last.name %></td>
             <td><%= student.performance_tests.order("created_at").last.result %></td>
@@ -82,11 +78,11 @@ th, td {
             <td><form action="/performance_tests/<%= student.performance_tests.order("created_at").last.id %>/edit" method="get" style="display: inline-block;">
                 <input type="submit" value="Edit"/>
             </form></td>
-            <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-                <input type="hidden" id="id" name="id" value="<%= student.id %>" />
-                <input type="submit" value="New"/>
-            </form></td>
         <% end %>
+            <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
+              <input type="hidden" id="id" name="id" value="<%= student.id %>" />
+              <input type="submit" value="New"/>
+            </form></td>
             <td><form action="/students/<%= student.id %>" method="get" style="display: inline-block;">
                 <input type="submit" value="<%= student.first_name %>'s Data" />
             </form></td>
