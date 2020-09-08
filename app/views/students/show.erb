@@ -46,7 +46,6 @@ th, td {
 <% end %>
 <br><br>
 
-
 <table style="width:100%">
     <tr>
         <th>Test Name</th>
@@ -56,27 +55,34 @@ th, td {
         <th>Delete Test</th>
         <th>New Test</th>
     </tr>
-    <% @student.performance_tests.each do |test|%>
     <tr>
-        <td><%= test.name %></td>
-        <td><%= test.result %></td>
-        <td><%= test.testing_date.strftime("%B %Y") %></td>
-        <% if authorize_user(@student)%>
-            <td><form action="/performance_tests/<%= test.id %>/edit" method="get" style="display: inline-block;">
-                <input type="submit" value="Edit"/>
-            </form></td>
-            <td><form action="/performance_tests/<%= test.id %>" method="post" style="display: inline-block;">
-               <input id="hidden" type="hidden" name="_method" value="delete" />
-               <input type="submit" value="Delete Test" />
-            </form></td>
-        <% else %>
-            <td></td>
-            <td></td>
-         <% end %>    
+      <% if @student.performance_tests.empty? %>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
+         <td></td>
          <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
-                <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-                <input type="submit" value="Add Test"/>
+            <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+            <input type="submit" value="New Test"/>
+         </form></td>    
+      <% else %>
+         <% @student.performance_tests.each do |test|%>
+         <td><%= test.name %></td>
+         <td><%= test.result %></td>
+         <td><%= test.testing_date.strftime("%B %Y") %></td>
+         <td><form action="/performance_tests/<%= test.id %>/edit" method="get" style="display: inline-block;">
+            <input type="submit" value="Edit Test"/>
          </form></td>
-    </tr>
-   <% end %>
+         <td><form action="/performance_tests/<%= test.id %>" method="post" style="display: inline-block;">
+            <input id="hidden" type="hidden" name="_method" value="delete" />
+            <input type="submit" value="Delete Test" />
+         </form></td>
+         <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
+            <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+            <input type="submit" value="New Test"/>
+         </form></td> 
+         </tr>   
+         <% end %>
+      <% end %>
 </table>
