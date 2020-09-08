@@ -36,7 +36,7 @@ th, td {
 
 <% if authorize_user(@student) %>
    <form action="/students/<%= @student.id %>/edit" method="post" style="display: inline-block;">
-    <input id="hidden" type="hidden" name="_method" value="edit" />
+    <input id="hidden" type="hidden" name="_method" value="patch" />
     <input type="submit" value="Edit Student" />
    </form>
    <form action="/students/<%= @student.id %>" method="post" style="display: inline-block;">
@@ -48,7 +48,7 @@ th, td {
 
 <table style="width:100%">
     <tr>
-        <th>Test Name</th>
+        <th>Test</th>
         <th>Result</th>
         <th>Date</th>
         <th>Edit Test</th>
@@ -71,16 +71,17 @@ th, td {
          <td><%= test.name %></td>
          <td><%= test.result %></td>
          <td><%= test.testing_date.strftime("%B %Y") %></td>
-         <td><form action="/performance_tests/<%= test.id %>/edit" method="get" style="display: inline-block;">
-            <input type="submit" value="Edit Test"/>
+         <td><form action="/performance_tests/<%= test.id %>/edit" method="post" style="display: inline-block;">
+            <input id="hidden" type="hidden" name="_method" value="patch" />
+            <input type="submit" value="Edit"/>
          </form></td>
          <td><form action="/performance_tests/<%= test.id %>" method="post" style="display: inline-block;">
             <input id="hidden" type="hidden" name="_method" value="delete" />
-            <input type="submit" value="Delete Test" />
+            <input type="submit" value="Delete" />
          </form></td>
          <td><form action="/performance_tests/new" method="get" style="display: inline-block;">
             <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-            <input type="submit" value="New Test"/>
+            <input type="submit" value="New"/>
          </form></td> 
          </tr>   
          <% end %>
