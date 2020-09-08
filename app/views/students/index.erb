@@ -75,7 +75,6 @@ th, td {
                 <input type="hidden" id="id" name="id" value="<%= student.id %>" />
                 <input type="submit" value="New"/>
             </form></td>
-            <td></td>
         <% else %>
             <td><%= student.performance_tests.order("created_at").last.name %></td>
             <td><%= student.performance_tests.order("created_at").last.result %></td>
@@ -87,11 +86,11 @@ th, td {
                 <input type="hidden" id="id" name="id" value="<%= student.id %>" />
                 <input type="submit" value="New"/>
             </form></td>
+        <% end %>
             <td><form action="/students/<%= student.id %>" method="get" style="display: inline-block;">
-                <input type="submit" value="All Data" />
+                <input type="submit" value="<%= student.first_name %>'s Data" />
             </form></td>
     </tr>
-        <%end %>
     <% end %>
 </table>
 </body>
