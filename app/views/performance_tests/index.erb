@@ -1,8 +1,53 @@
+<style>
+body  {
+  background-color: #115517;
+}
+
+table {
+  width:100%;
+}
+    
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+    
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+    
+#t01 tr:nth-child(even) {
+  background-color: #eee;
+}
+    
+#t01 tr:nth-child(odd) {
+  background-color: #fff;
+}
+    
+#t01 th {
+  background-color: white;
+  color: black;
+}
+</style>
+
 <h1>Performance Tests</h1>
 
-<% @students.each.with_index do |student, index|%>
-    <h4><%= index + 1 %>. <%= student.first_name %> <%= student.last_name %></h4><br>
-    <% student.performance_tests.each do |test|%>
-        <p><a href="/performance_tests/<%= test.id %>"><%= test.name %>: <%= test.result %> <%= test.testing_date.strftime("%B %Y") %></a></p>
-    <% end %>
+<% @students.each do |student|%>
+    <h4><a href="/students/<%= student.id %>"><%= student.first_name %> <%= student.last_name %></h4></a>
+    <br>
+        <table style="width:75%">
+            <tr>
+                <th>Test</th>
+                <th>Result</th>
+                <th>Date</th>
+            </tr>
+            <% student.performance_tests.each do |test|%>
+                <tr>
+                    <td><%= test.name %></td>
+                    <td><%= test.result %></td>
+                    <td><%= test.testing_date.strftime("%B %Y") %></td>
+                </tr>
+            <% end %>
+        </table><br> 
 <% end %>
