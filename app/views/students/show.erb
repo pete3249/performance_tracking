@@ -1,36 +1,3 @@
-<style>
-body  {
-  background-color: #115517;
-}
-
-table {
-  width:100%;
-}
-    
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-    
-th, td {
-  padding: 15px;
-  text-align: left;
-}
-    
-#t01 tr:nth-child(even) {
-  background-color: #eee;
-}
-    
-#t01 tr:nth-child(odd) {
-  background-color: #fff;
-}
-    
-#t01 th {
-  background-color: white;
-  color: black;
-}
-</style>
-
 <h1><%= @student.first_name %> <%= @student.last_name %></h1>
 <h3>Graduation Year: <%= @student.grad_year%></h3>
 
@@ -43,14 +10,6 @@ th, td {
     <input type="submit" value="Delete Student" />
    </form>
 <% end %>
-<br>
-
-<% if logged_in? %>
-  <form action="/performance_tests/new" method="get" style="display: inline-block;">
-    <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
-    <input type="submit" value="New Test"/>
-  </form> 
-<% end %>
 <br><br>
 
 <table style="width:100%">
@@ -58,6 +17,7 @@ th, td {
         <th>Test</th>
         <th>Result</th>
         <th>Date</th>
+        <th>View Test</th>
         <th>Edit Test</th>
         <th>Delete Test</th>
     </tr>
@@ -67,12 +27,16 @@ th, td {
          <td></td>
          <td></td>
          <td></td>
-         <td></td>  
+         <td></td> 
+         <td></td>
       <% else %>
          <% @student.performance_tests.each do |test|%>
          <td><%= test.name %></td>
          <td><%= test.result %></td>
          <td><%= test.testing_date.strftime("%B %Y") %></td>
+         <td><form action="/performance_tests/<%= test.id %>" method="get" style="display: inline-block;">
+            <input type="submit" value="View"/>
+         </form></td>
          <td><form action="/performance_tests/<%= test.id %>/edit" method="post" style="display: inline-block;">
             <input id="hidden" type="hidden" name="_method" value="patch" />
             <input type="submit" value="Edit"/>
@@ -84,4 +48,13 @@ th, td {
          </tr>   
          <% end %>
       <% end %>
-</table>
+</table><br>
+
+<% if logged_in? %>
+  <form action="/performance_tests/new" method="get" style="display: inline-block;">
+    <input type="hidden" id="id" name="id" value="<%= @student.id %>" />
+    <input type="submit" value="New Test"/>
+  </form> 
+<% end %>
+
+
