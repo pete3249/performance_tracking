@@ -1,18 +1,18 @@
 class PerformanceTestsController < ApplicationController
 
-  get "/performance_tests" do
+  get '/performance_tests' do
     @students = Student.all.sort
     erb :"/performance_tests/index"
   end
 
-  get "/performance_tests/new" do
+  get '/performance_tests/new' do
     redirect_if_not_logged_in
     find_student
     @performance_test = PerformanceTest.new
     erb :"/performance_tests/new"
   end
 
-  post "/performance_tests" do
+  post '/performance_tests' do
     redirect_if_not_logged_in
     find_student
     params[:performance_test][:testing_date] = Date.strptime(params[:performance_test][:testing_date], "%m/%d/%Y")
@@ -26,19 +26,19 @@ class PerformanceTestsController < ApplicationController
     end
   end
 
-  get "/performance_tests/:id" do
+  get '/performance_tests/:id' do
     redirect_if_not_logged_in
     find_test
     erb :"/performance_tests/show"
   end
 
-  get "/performance_tests/:id/edit" do
+  get '/performance_tests/:id/edit' do
     find_test
     redirect_if_fail_to_authorize
     erb :"/performance_tests/edit"
   end
 
-  patch "/performance_tests/:id" do
+  patch '/performance_tests/:id' do
     find_test
     redirect_if_fail_to_authorize
     if @performance_test.update(params[:performance_test])
@@ -50,7 +50,7 @@ class PerformanceTestsController < ApplicationController
     end 
   end
 
-  delete "/performance_tests/:id" do
+  delete '/performance_tests/:id' do
     find_test
     redirect_if_fail_to_authorize
     @performance_test.destroy
