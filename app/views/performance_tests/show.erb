@@ -1,7 +1,8 @@
-<h3><%= @performance_test.student.first_name%> <%= @performance_test.student.last_name%></h3>
-<p><%= @performance_test.name %></p>
-<p><%= @performance_test.result %></p>
-<p><%= @performance_test.testing_date.strftime("%B %Y")%></p>
+<br>
+<h2><%= @performance_test.student.first_name%> <%= @performance_test.student.last_name%></h2>
+<p>Test: <%= @performance_test.name %></p>
+<p>Result: <%= @performance_test.result %></p>
+<p>Date Completed: <%= @performance_test.testing_date.strftime("%B %Y")%></p>
 
 <% if authorize(@performance_test) %>
    <form action="/performance_tests/<%= @performance_test.id %>/edit" method="get" style="display: inline-block;">
@@ -13,6 +14,6 @@
    </form>
 <% end %>
 
-<form action="/performance_tests" method="get" style="display: inline-block;"> 
-    <button><input type="submit" value="Tests"></button>
+<form action="/students/<%= @performance_test.student.id %>" method="get" style="display: inline-block;"> 
+    <button><input type="submit" value="Other Tests"></button>
 </form>
