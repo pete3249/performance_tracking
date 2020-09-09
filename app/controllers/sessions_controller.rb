@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         user = User.find_by_email(params[:email])
         if user && user.authenticate(params[:password])
             session[:id] = user.id
-            redirect '/students'
+            redirect "/students"
         else 
             @error = "Incorrect email or password, please try again"
             erb :'/sessions/login'
