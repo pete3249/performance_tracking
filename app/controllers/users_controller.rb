@@ -8,9 +8,9 @@ class UsersController < ApplicationController
         user = User.new(params[:user])
         if user.save
             session[:id] = user.id
-            redirect '/'
+            redirect "/students"
         else
-            redirect '/users/new'
+            redirect "/users/new"
         end 
     end
 
