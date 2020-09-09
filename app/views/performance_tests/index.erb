@@ -1,33 +1,6 @@
 <style>
-body  {
-  background-color: #115517;
-}
-
 table {
   width:75%;
-}
-    
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-    
-th, td {
-  padding: 15px;
-  text-align: left;
-}
-    
-#t01 tr:nth-child(even) {
-  background-color: #eee;
-}
-    
-#t01 tr:nth-child(odd) {
-  background-color: #fff;
-}
-    
-#t01 th {
-  background-color: white;
-  color: black;
 }
 </style>
 
@@ -43,7 +16,7 @@ th, td {
                 <th>Result</th>
                 <th>Date</th>
             </tr>
-            <% student.performance_tests.order("created_at").each do |test|%>
+            <% student.performance_tests.order("created_at DESC").each do |test|%>
                 <tr>
                     <td><%= test.name %></td>
                     <td><%= test.result %></td>
