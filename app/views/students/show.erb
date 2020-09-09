@@ -37,8 +37,7 @@
          <td><form action="/performance_tests/<%= test.id %>" method="get" style="display: inline-block;">
             <input type="submit" value="View"/>
          </form></td>
-         <td><form action="/performance_tests/<%= test.id %>/edit" method="post" style="display: inline-block;">
-            <input id="hidden" type="hidden" name="_method" value="patch" />
+         <td><form action="/performance_tests/<%= test.id %>/edit" method="get" style="display: inline-block;">
             <input type="submit" value="Edit"/>
          </form></td>
          <td><form action="/performance_tests/<%= test.id %>" method="post" style="display: inline-block;">
