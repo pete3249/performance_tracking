@@ -1,4 +1,4 @@
-# Heading 1 Performance Tracking
+# Performance Tracking
 
 **Description**
 As a strength and conditioning coach, it is crucial to test your athletes periodically and use results to evaluate the effectiveness of your program. This application is specifically designed for high school strength and conditioning coaches, but can be used by any coach who wants to simplify data entry and track athletes and their fitness scores over time. 
