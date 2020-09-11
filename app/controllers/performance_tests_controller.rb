@@ -20,7 +20,7 @@ class PerformanceTestsController < ApplicationController
     @performance_test.user = current_user
     if @performance_test.save
       flash[:success] = "Test successfully stored"
-      redirect "/performance_tests"
+      redirect "/students/#{@student.id}"
     else
       erb :"/performance_tests/new"
     end
@@ -52,9 +52,10 @@ class PerformanceTestsController < ApplicationController
 
   delete '/performance_tests/:id' do
     find_test
+    @student = @performance_test.student
     redirect_if_fail_to_authorize
     @performance_test.destroy
-    redirect "/performance_tests"
+    redirect "/students/#{@student.id}"
   end
 
   private
