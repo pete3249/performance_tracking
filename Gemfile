@@ -9,13 +9,13 @@ gem 'sqlite3', '~> 1.3.6'
 gem 'thin'
 gem 'shotgun'
 gem 'pry'
-gem 'bcrypt'
+gem 'bcrypt' # encrypts passwords
 gem 'tux'
-gem 'sinatra-flash'
+gem 'sinatra-flash' # allows for display of flash messages
 
 group :development, :test do 
-  gem 'dotenv'
-  gem 'session_secret_generator'
+  gem 'dotenv' # loads the variable in the `.env` file
+  gem 'session_secret_generator' # generates a secure session_secret
 end
 
 group :test do
