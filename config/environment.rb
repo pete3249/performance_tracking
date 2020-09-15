@@ -8,6 +8,7 @@ ActiveRecord::Base.establish_connection(
   :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
 )
 
+# Load the environment variable into app
 Dotenv.load
 
 require './app/controllers/application_controller'
