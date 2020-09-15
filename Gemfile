@@ -10,7 +10,7 @@ gem 'thin'
 gem 'shotgun'
 gem 'pry'
 gem 'bcrypt' # encrypts passwords
-gem 'tux'
+gem 'tux' # interactive console that preloads database and AR relationships
 gem 'sinatra-flash' # allows for display of flash messages
 
 group :development, :test do 
